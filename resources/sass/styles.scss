@@ -1,0 +1,85 @@
+/* Compass
+------------------------------*/
+@import "compass";
+@import "compass/css3";
+@import "animations";
+$background: #272822;
+$pink: #f92672;
+$orange: #fd971f;
+$spacing: 30px;
+
+.livepage-loading * {
+	-webkit-transition: none;
+}
+*{ box-sizing: border-box; }
+html, body{ background: $background; color: $orange; font-family: sans-serif; font-size: 20px; text-shadow: 1px 1px 10px #000;}
+h1{ color: #f92672; }
+
+ul{
+	list-style: none;
+	margin-left: 50px;
+	li{
+		background: $orange;
+		display: block;
+		margin-bottom: 10px;
+		height: $spacing;
+		position: relative;
+		width: 300px;	
+		div{			
+			background: $pink;
+			border: 2px solid $background;
+			border-radius: 50%;
+			height: $spacing;
+			position: relative;
+			width: $spacing;
+		}
+		.xplain{
+			display: block;
+			left: 340px;
+			position: absolute;
+			top: 0;
+			width: 500px;
+		}
+		.answer{
+			background: $background;
+			border-radius: 10px;
+			box-shadow: 0 0 5px 3px #fff;
+			display: block;
+			height: 200px;
+			padding: 10px;
+			left: -10px;
+			top: -10px;
+			position: absolute;
+			width: 200px;
+			z-index: 10;
+			@extend .animated;	
+			@extend .bounceOutUp;
+		}
+		&:hover{
+			div{
+				left: 100%;
+				margin-left: -$spacing;
+			}
+			.answer{					
+				@extend .bounceInDown;
+			}
+		}	
+	}
+}
+
+
+// Examples
+li{
+	.standard{ @include transition(all 1000ms); }
+	.hover{}
+	.different{ @include transition(all 2000ms); }
+	.bezier{}	
+}
+
+//Hover
+li:hover{
+	.standard{}
+	.hover{	@include transition(all 1000ms); }
+	.different{ @include transition(all 300ms); }
+	.bezier{ @include transition (1s cubic-bezier(0, -.6, 0.96, 1.11)); }	
+}
