@@ -40,29 +40,24 @@ ul{
 			position: absolute;
 			top: 0;
 			width: 500px;
+			z-index: 5;
 		}
-		.answer{
-			background: $background;
-			border-radius: 10px;
-			box-shadow: 0 0 5px 3px #fff;
-			display: block;
-			height: 200px;
-			padding: 10px;
-			left: -10px;
-			top: -10px;
-			position: absolute;
-			width: 200px;
-			z-index: 10;
-			@extend .animated;	
-			@extend .bounceOutUp;
+		.answer{			
+			font-size: 0;
+			font-weight: 700;
+			opacity: 0;
+			overflow: hidden;
 		}
 		&:hover{
 			div{
 				left: 100%;
 				margin-left: -$spacing;
 			}
-			.answer{					
-				@extend .bounceInDown;
+			.answer{	
+				font-size: 20px;
+				opacity: 1;
+				@include transition(font-size 200ms, 
+									opacity 1000ms);
 			}
 		}	
 	}
@@ -74,6 +69,8 @@ li{
 	.standard{ @include transition(all 1000ms); }
 	.hover{}
 	.different{ @include transition(all 2000ms); }
+	.delay{}
+	.multible{width: 0; opacity: 0;}
 	.bezier{}	
 }
 
@@ -82,5 +79,27 @@ li:hover{
 	.standard{}
 	.hover{	@include transition(all 1000ms); }
 	.different{ @include transition(all 300ms); }
+	.delay{ @include transition(all 300ms 1000ms); }
+	.multible{	
+		width: $spacing;
+		opacity: 1;
+		@include transition(left 1500ms,
+							opacity 500ms,
+							width 1000ms);
+	}
 	.bezier{ @include transition (1s cubic-bezier(0, -.6, 0.96, 1.11)); }	
+}
+
+//Max-height example
+.menu {
+    max-height: 0;
+    overflow: hidden;
+    position: relative;
+    @include transition(max-height 1000ms);
+}
+.max-height:hover .menu {
+    max-height: 300px;
+    height: 100%;
+    @include transition(max-height 300ms);
+
 }
